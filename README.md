@@ -10,3 +10,5 @@ Simple react native app for my workshop.
    - `npm install`
 3. Start our freshly bootstrapped app
    - `npm run start`
+4. Play around with the app on phone and on web
+5. Delete contents of `index.tsx` and replace it with simple counter
