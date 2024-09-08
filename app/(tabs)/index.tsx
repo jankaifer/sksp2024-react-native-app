@@ -3,11 +3,31 @@ import { Image, StyleSheet, Button } from "react-native";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Haptics from "expo-haptics";
+import { CameraView, useCameraPermissions } from "expo-camera";
 
 export default function HomeScreen() {
   const [clicks, setClicks] = useState(0);
+  const [permission, requestPermission] = useCameraPermissions();
+
+  useEffect(() => {
+    if (!permission?.granted) {
+      requestPermission();
+    }
+  }, [permission, requestPermission]);
+
+  if (!permission) {
+    return <ThemedView />;
+  }
+
+  if (!permission.granted) {
+    return (
+      <ThemedView style={{ margin: 50 }}>
+        <ThemedText>We need your camera!</ThemedText>
+      </ThemedView>
+    );
+  }
 
   return (
     <ParallaxScrollView
@@ -28,6 +48,9 @@ export default function HomeScreen() {
           }}
           title="Click me!"
         />
+      </ThemedView>
+      <ThemedView>
+        <CameraView facing="back" style={{ width: 100, height: 100 }} />
       </ThemedView>
     </ParallaxScrollView>
   );
