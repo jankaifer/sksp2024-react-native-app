@@ -12,3 +12,4 @@ Simple react native app for my workshop.
    - `npm run start`
 4. Play around with the app on phone and on web
 5. Delete contents of `index.tsx` and replace it with simple counter
+6. Look into [Expo docs](https://docs.expo.dev/versions/latest/) and figure out how to add haptics

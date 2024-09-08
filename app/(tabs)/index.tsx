@@ -4,6 +4,7 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useState } from "react";
+import * as Haptics from "expo-haptics";
 
 export default function HomeScreen() {
   const [clicks, setClicks] = useState(0);
@@ -20,7 +21,13 @@ export default function HomeScreen() {
     >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Button was clicked {clicks} times</ThemedText>
-        <Button onPress={() => setClicks(clicks + 1)} title="Click me!" />
+        <Button
+          onPress={() => {
+            Haptics.selectionAsync();
+            setClicks(clicks + 1);
+          }}
+          title="Click me!"
+        />
       </ThemedView>
     </ParallaxScrollView>
   );
